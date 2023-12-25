@@ -78,7 +78,7 @@ function Page() {
                   key={product.productID}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-80 dark:hover:bg-gray-700"
                   onClick={() => {
-                    router.push(`/admin/stock/${product.productID}`);
+                    router.push(`/admin/stock/item?id=${product.productID}`);
                   }}
                 >
                   <td className="pr-4 pl-8 py-3">{product.name}</td>
