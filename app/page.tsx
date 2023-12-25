@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,15 +15,36 @@ export default function Home() {
   const onLogin = async () => {
     try {
       await axios
-        .post("http://localhost:7060/api/login", {
+        .post("https://localhost:7060/api/login", {
           email: email,
           password: password,
         })
         .then((res) => {
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("user", JSON.stringify(res.data.user));
-          if (typeof window !== "undefined") {
-            router.replace("/home");
+          if (res.data !== null) {
+            toast.success("Login success");
+            localStorage.setItem("user", JSON.stringify(res.data));
+            if (typeof window !== "undefined") {
+              console.log(res.data.role);
+              switch (res.data.role) {
+                case "admin":
+                  router.replace("/admin");
+                  break;
+                case "customer":
+                  router.replace("/home");
+                  break;
+                case "seller":
+                  router.replace("/seller");
+                  break;
+                case "outlet":
+                  router.replace("/outlet");
+                  break;
+                default:
+                  router.replace("/home");
+                  break;
+              }
+            }
+          } else {
+            toast.error("Login Failed");
           }
         });
     } catch (error: any) {
@@ -48,14 +68,7 @@ export default function Home() {
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <Image
-            src="logo.svg"
-            alt="logo"
-            width={32}
-            height={32}
-            className="mr-2"
-          />
-          Bloggin.
+          DD Footware
         </a>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
