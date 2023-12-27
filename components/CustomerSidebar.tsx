@@ -1,7 +1,7 @@
 // SidebarButton.js
 import React from "react";
 
-const SellerSideBar = () => {
+const CustomerSidebar = () => {
   return (
     <>
       <aside
@@ -11,28 +11,9 @@ const SellerSideBar = () => {
       >
         <div className="h-full pl-3 py-4 overflow-y-hidden bg-gray-50 dark:bg-gray-800 pr-10">
           <ul className="space-y-2 font-medium">
-            {/* <li>
-              <a
-                href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Product Search
-                </span>
-              </a>
-            </li> */}
             <li>
               <a
-                href="/seller/stock"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <span className="ms-3">Stock Dashboard</span>
-              </a>
-            </li>
-
-            <li>
-              <a
-                href="/seller/orders"
+                href="/customer/orders"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
@@ -42,7 +23,7 @@ const SellerSideBar = () => {
             </li>
             <li>
               <a
-                href="/seller/orders/add"
+                href="/customer/orders/add"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
@@ -50,19 +31,12 @@ const SellerSideBar = () => {
                 </span>
               </a>
             </li>
-            <li>
-              <a
-                href="/seller/sales"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">Sales</span>
-              </a>
-            </li>
+           
 
             <li>
               <a
                 href="/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -89,4 +63,4 @@ const SellerSideBar = () => {
   );
 };
 
-export default SellerSideBar;
+export default CustomerSidebar;

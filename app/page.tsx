@@ -30,7 +30,7 @@ export default function Home() {
                   router.replace("/admin");
                   break;
                 case "customer":
-                  router.replace("/home");
+                  router.replace("/customer");
                   break;
                 case "seller":
                   router.replace("/seller");
@@ -39,7 +39,7 @@ export default function Home() {
                   router.replace("/outlet");
                   break;
                 default:
-                  router.replace("/home");
+                  router.replace("/customer");
                   break;
               }
             }

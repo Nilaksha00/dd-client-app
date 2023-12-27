@@ -46,6 +46,66 @@ function ViewBlog() {
 
   const onEditProduct = async () => {
     try {
+      await axios.get("https://localhost:7060/api/orders").then((res) => {
+        console.log("PREEE", res.data);
+        const filteredOrders = res.data
+          .filter((order: any) => order.orderStatus === "Pre Ordered")
+          .sort((a: any, b: any) => {
+            const dateA: any = new Date(a.date);
+            const dateB: any = new Date(b.date);
+
+            return dateA - dateB;
+          });
+
+        filteredOrders.forEach(async (order: any) => {
+          console.log(order);
+
+          if (order.productID === id) {
+            order.orderStatus = "Accepted";
+
+            const res2 = await axios.get(
+              `https://localhost:7060/api/products/${order.productID}`
+            );
+            const productData = res2.data;
+
+            let quantity =
+              parseInt(productData.quantity) - parseInt(order.quantity);
+
+            console.log("Quantity: " + quantity);
+
+            if (quantity > 0) {
+              await axios.put(
+                `https://localhost:7060/api/orders/${order.orderID}`,
+                {
+                  orderID: order.orderID,
+                  outletID: order.outletID,
+                  productID: order.productID,
+                  quantity: order.quantity,
+                  total: order.total,
+                  orderStatus: order.orderStatus,
+                  orderDate: order.orderDate,
+                }
+              );
+
+              await axios.put(
+                `https://localhost:7060/api/products/${order.productID}`,
+                {
+                  productID: productData.productID,
+                  name: productData.name,
+                  category: productData.category,
+                  size: productData.size,
+                  quantity: quantity.toString(),
+                  price: productData.price,
+                  status: "Available",
+                }
+              );
+            } else {
+              toast.error("Product update failed");
+              console.log("Product update failed");
+            }
+          }
+        });
+      });
       await axios
         .put(`https://localhost:7060/api/products/${id}`, {
           name: name,
@@ -57,7 +117,6 @@ function ViewBlog() {
         })
         .then((res) => {
           if (res.data !== null) {
-            
             toast.success("Product updated successfully");
             router.push("/admin/stock");
           } else {
