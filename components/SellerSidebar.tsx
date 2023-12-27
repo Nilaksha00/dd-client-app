@@ -1,7 +1,7 @@
 // SidebarButton.js
 import React from "react";
 
-const OutletSideBar = () => {
+const SellerSideBar = () => {
   return (
     <>
       <aside
@@ -23,7 +23,7 @@ const OutletSideBar = () => {
             </li> */}
             <li>
               <a
-                href="/outlet/stock"
+                href="/seller/stock"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <span className="ms-3">Stock Dashboard</span>
@@ -32,7 +32,7 @@ const OutletSideBar = () => {
 
             <li>
               <a
-                href="/outlet/orders"
+                href="/seller/orders"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
@@ -42,7 +42,7 @@ const OutletSideBar = () => {
             </li>
             <li>
               <a
-                href="/outlet/orders/add"
+                href="/seller/orders/add"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
@@ -89,4 +89,4 @@ const OutletSideBar = () => {
   );
 };
 
-export default OutletSideBar;
+export default SellerSideBar;

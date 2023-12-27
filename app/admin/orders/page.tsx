@@ -34,35 +34,82 @@ function Page() {
   const acceptOrder = async (product: any) => {
     try {
       product.orderStatus = "Accepted";
-      const res = await axios.put(
-        `https://localhost:7060/api/orders/${product.orderID}`,
-        {
-          orderID: product.orderID,
+
+      const res2 = await axios.get(
+        `https://localhost:7060/api/products/${product.productID}`
+      );
+      const productData = res2.data;
+
+      let quantity =
+        parseInt(productData.quantity) - parseInt(product.quantity);
+
+      console.log("Quantity: " + quantity);
+
+      if (quantity > 0) {
+        await axios.put(
+          `https://localhost:7060/api/orders/${product.orderID}`,
+          {
+            orderID: product.orderID,
+            outletID: product.outletID,
+            productID: product.productID,
+            quantity: product.quantity,
+            total: product.total,
+            orderStatus: product.orderStatus,
+            orderDate: product.orderDate,
+          }
+        );
+
+        await axios.put(
+          `https://localhost:7060/api/products/${product.productID}`,
+          {
+            productID: productData.productID,
+            name: productData.name,
+            category: productData.category,
+            size: productData.size,
+            quantity: quantity.toString(),
+            price: productData.price,
+            status: productData.status,
+          }
+        );
+
+        await axios.post(`https://localhost:7060/api/stock/${product.outletID}`, {
           outletID: product.outletID,
           productID: product.productID,
+          productName: productData.name,
           quantity: product.quantity,
-          total: product.total,
-          orderStatus: product.orderStatus,
-          orderDate: product.orderDate,
-        }
-      );
+          productCategory: productData.category,
+          productSize: productData.size,
+          productBuyingPrice: productData.price,
+        });
+        
+      } else {
+        await axios.put(
+          `https://localhost:7060/api/orders/${product.orderID}`,
+          {
+            orderID: product.orderID,
+            outletID: product.outletID,
+            productID: product.productID,
+            quantity: product.quantity,
+            total: product.total,
+            orderStatus: "Pre Ordered",
+            orderDate: product.orderDate,
+          }
+        );
 
-      const res2 = await axios.get(`https://localhost:7060/api/products/${product.productID}`);
-      const productData = res2.data;
-      productData.quantity = productData.quantity - product.quantity;
-      const res3 = await axios.put(`https://localhost:7060/api/products/${product.productID}`, {
-        productID: productData.productID,
-        name: productData.name,
-        category: productData.category,
-        size: productData.size,
-        quantity: productData.quantity,
-        price: productData.price,
-        status: productData.status,
-      });
-      console.log(res3.data);
+        await axios.put(
+          `https://localhost:7060/api/products/${product.productID}`,
+          {
+            productID: productData.productID,
+            name: productData.name,
+            category: productData.category,
+            size: productData.size,
+            quantity: productData.quantity,
+            price: productData.price,
+            status: "Locked",
+          }
+        );
+      }
 
-      const res4 = await axios.get(`https://localhost:7060/api/stock/${product.outletID}`);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }

@@ -38,7 +38,7 @@ function ViewBlog() {
     statusContent = "Low Stock";
   } else if (status === "out") {
     statusContent = "Out of Stock";
-  } else if (status === "locked") {
+  } else if (status === "Locked") {
     statusContent = "Locked";
   } else {
     statusContent = "Available";
@@ -57,6 +57,7 @@ function ViewBlog() {
         })
         .then((res) => {
           if (res.data !== null) {
+            
             toast.success("Product updated successfully");
             router.push("/admin/stock");
           } else {

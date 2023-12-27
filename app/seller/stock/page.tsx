@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import OutletSideBar from "@/components/OutletSidebar";
+import SellerSideBar from "@/components/SellerSidebar";
 
 interface Product {
   stockID: string;
@@ -46,7 +46,7 @@ function Page() {
 
   return (
     <div>
-      <OutletSideBar />
+      <SellerSideBar />
       <div className="overflow-x-auto ml-64">
         <div className="w-full flex flex-row align-middle justify-center">
           <input
