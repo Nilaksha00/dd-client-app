@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import axios from "axios";
-import OutletSideBar from "@/components/OutletSidebar";
 import AdminSideBar from "@/components/AdminSidebar";
 
 interface Product {
@@ -16,7 +14,6 @@ interface Product {
 
 function Page() {
   const [products, setProducts] = useState<Product[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,16 +69,18 @@ function Page() {
           }
         );
 
-        await axios.post(`https://localhost:7060/api/stock/${product.outletID}`, {
-          outletID: product.outletID,
-          productID: product.productID,
-          productName: productData.name,
-          quantity: product.quantity,
-          productCategory: productData.category,
-          productSize: productData.size,
-          productBuyingPrice: productData.price,
-        });
-        
+        await axios.post(
+          `https://localhost:7060/api/stock/${product.outletID}`,
+          {
+            outletID: product.outletID,
+            productID: product.productID,
+            productName: productData.name,
+            quantity: product.quantity,
+            productCategory: productData.category,
+            productSize: productData.size,
+            productBuyingPrice: productData.price,
+          }
+        );
       } else {
         await axios.put(
           `https://localhost:7060/api/orders/${product.orderID}`,
@@ -109,7 +108,6 @@ function Page() {
           }
         );
       }
-
     } catch (error) {
       console.log(error);
     }

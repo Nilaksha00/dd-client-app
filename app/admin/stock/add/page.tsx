@@ -43,7 +43,6 @@ function AddProduct() {
       name.length > 0 &&
       size.length > 0 &&
       category.length > 0 &&
-      status.length > 0 &&
       quantity.length > 0 &&
       price.length > 0
     ) {
@@ -146,7 +145,7 @@ function AddProduct() {
           id="small-input"
           className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option value="available">Available</option>
+          <option value="">Select</option>
           <option value="low">Low Stock</option>
           <option value="out">Out of Stock</option>
           <option value="available">Available</option>

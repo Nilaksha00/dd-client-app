@@ -4,7 +4,7 @@ import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-function ViewBlog() {
+function Page() {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
   const [category, setCategory] = useState("");
@@ -15,7 +15,7 @@ function ViewBlog() {
   const searchParams = useSearchParams();
 
   const router = useRouter();
-  const id = searchParams.get("id");
+  const id = searchParams?.get("id");
 
   useEffect(() => {
     async function fetchData() {
@@ -274,4 +274,4 @@ function ViewBlog() {
   );
 }
 
-export default ViewBlog;
+export default Page;
